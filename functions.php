@@ -1,4 +1,23 @@
 <?php
+
+function getDb() {
+	return new PDO('mysql:host='.HOST.';dbname='.DB, USER, PASS);
+}
+
+
+function d($v)
+{
+	if(is_array($v)) {
+		foreach ($v as $n) {
+			var_dump($n);
+		}
+	} else {
+		var_dump($v);
+	}
+
+	die();
+}
+
 function get_test_data($test_id) {
 	if ( !'test_id' ) return;
 	global $db;

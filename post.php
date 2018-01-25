@@ -1,22 +1,16 @@
 <?php
-require_once'config.php';
-require_once'functions.php';
+require_once 'init.php';
 
-$q = $_GET['Tests'];
-if( isset($_GET['Tests'])) {
-	$test_id = (int)$_GET['Tests'];
-	$test_data = get_test_data($test_id);
-	//var_dump($test_data); 
-	echo "<ul>";
-	foreach ($test_data as $key => $value)
-	{
-		foreach($value as $v)
-		{
-		echo "<li>". $v . "</li>";
-		}
-	}
-	echo "</ul>";
-}
+$uid = $userModel->save($_GET['name']);
+$session->set('uid', $uid);
 
-?>
+$testId = (int)(isset($_GET['test']) ? $_GET['test'] : 1);
+$session->set('test', $testId);
 
+$resultId = $endModel->save($testId, $uid);
+$session->set('result', $resultId);
+
+$result = $endModel->getById($resultId);
+$session->set('count', $result['total_questions']);
+
+header('Location: post_question.php');
