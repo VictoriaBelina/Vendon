@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.1.14
+-- version 4.5.2
 -- http://www.phpmyadmin.net
 --
--- Хост: 127.0.0.1
--- Время создания: Янв 24 2018 г., 21:10
--- Версия сервера: 5.6.17
--- Версия PHP: 5.5.12
+-- Host: 127.0.0.1
+-- Generation Time: Jan 25, 2018 at 07:38 PM
+-- Server version: 5.7.9
+-- PHP Version: 5.6.16
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,43 +14,68 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
--- База данных: `vendon`
+-- Database: `vendon`
 --
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `end_tests`
+-- Table structure for table `end_tests`
 --
 
+DROP TABLE IF EXISTS `end_tests`;
 CREATE TABLE IF NOT EXISTS `end_tests` (
-  `end_id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_test` int(11) NOT NULL,
-  `Name` varchar(255) NOT NULL,
-  `total_questions` int(11) NOT NULL,
-  `correct_questions` int(11) NOT NULL,
-  PRIMARY KEY (`end_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_test` int(11) NOT NULL DEFAULT '0',
+  `total_questions` int(11) NOT NULL DEFAULT '0',
+  `correct_questions` int(11) NOT NULL DEFAULT '0',
+  `user_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `testid` (`id_test`),
+  KEY `user` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `tests`
+-- Table structure for table `results`
 --
 
+DROP TABLE IF EXISTS `results`;
+CREATE TABLE IF NOT EXISTS `results` (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `test_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `question_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `answer_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `user_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `end_id` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `test` (`test_id`),
+  KEY `question` (`question_id`),
+  KEY `user_id` (`user_id`),
+  KEY `end` (`end_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tests`
+--
+
+DROP TABLE IF EXISTS `tests`;
 CREATE TABLE IF NOT EXISTS `tests` (
   `id_test` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(255) NOT NULL,
   `Test_description` varchar(255) NOT NULL,
   PRIMARY KEY (`id_test`),
   UNIQUE KEY `id` (`id_test`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
--- Дамп данных таблицы `tests`
+-- Dumping data for table `tests`
 --
 
 INSERT INTO `tests` (`id_test`, `Name`, `Test_description`) VALUES
@@ -61,9 +86,10 @@ INSERT INTO `tests` (`id_test`, `Name`, `Test_description`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `tests_answers`
+-- Table structure for table `tests_answers`
 --
 
+DROP TABLE IF EXISTS `tests_answers`;
 CREATE TABLE IF NOT EXISTS `tests_answers` (
   `answer_id` int(11) NOT NULL AUTO_INCREMENT,
   `answer` varchar(255) NOT NULL,
@@ -71,10 +97,10 @@ CREATE TABLE IF NOT EXISTS `tests_answers` (
   `correct_answer` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`answer_id`),
   KEY `FK_test_question` (`question_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=139 ;
+) ENGINE=InnoDB AUTO_INCREMENT=139 DEFAULT CHARSET=latin1;
 
 --
--- Дамп данных таблицы `tests_answers`
+-- Dumping data for table `tests_answers`
 --
 
 INSERT INTO `tests_answers` (`answer_id`, `answer`, `question_id`, `correct_answer`) VALUES
@@ -220,19 +246,20 @@ INSERT INTO `tests_answers` (`answer_id`, `answer`, `question_id`, `correct_answ
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `tests_questions`
+-- Table structure for table `tests_questions`
 --
 
+DROP TABLE IF EXISTS `tests_questions`;
 CREATE TABLE IF NOT EXISTS `tests_questions` (
   `question_id` int(11) NOT NULL AUTO_INCREMENT,
   `question` varchar(255) NOT NULL,
   `id_test` int(11) NOT NULL,
   PRIMARY KEY (`question_id`),
   KEY `FK_tests` (`id_test`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=33 ;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
 
 --
--- Дамп данных таблицы `tests_questions`
+-- Dumping data for table `tests_questions`
 --
 
 INSERT INTO `tests_questions` (`question_id`, `question`, `id_test`) VALUES
@@ -268,6 +295,19 @@ INSERT INTO `tests_questions` (`question_id`, `question`, `id_test`) VALUES
 (30, 'What is the proper way to center text?', 3),
 (31, 'What is the proper method of making each word in a text star with a capital letter?', 3),
 (32, 'What property is used to create space between an elements border and it''s content?', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user`
+--
+
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE IF NOT EXISTS `user` (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
