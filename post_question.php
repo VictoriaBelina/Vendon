@@ -6,7 +6,7 @@ $test = $testModel->getById($testId);
 
 $qnum = $session->get('qnum');
 if(!$qnum){
-    $qnum = 1;
+    $qnum = 0;
 }
 $session->set('qnum', $qnum);
 
@@ -21,20 +21,31 @@ $answers = $answerModel->getByQuestionId($question['question_id']);
 ?>
 
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 <head>
-    <title>Test "<?= $test['Name'] ?>" Question <?= $qnum ?></title>
+    <title>Test "<?= $test['Name'] ?>" Question <?= $qnum+1 ?></title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
-<body>
-    <h1>Test name: "<?= $test['Name'] ?>" Question: <?= $qnum ?> of <?= $session->get('count'); ?></h1>
-    <h2>Question: <?= $question['question'] ?></h2>
-    <form name="question" method="post" action="post_answer.php">
-        <?php foreach ($answers as $answer) { ?>
-            <p>
-                <input type="submit" name="answer[<?= $answer['answer_id'] ?>]" value="<?= $answer['answer'] ?>">
-            </p>
-        <?php } ?>
-    </form>
+<body background="http://nonessentials.org/wp-content/uploads/2014/01/dots-small-pattern.png">
+    <div class="container back">
+        <div class="row">
+            <h1>Test name: "<?= $test['Name'] ?>" Question: <?= $qnum+1 ?> of <?= $session->get('count'); ?></h1>
+        </div>
+        <div class="row">
+            <h2>Question: <?= $question['question'] ?></h2>
+        </div>
+        <div class="row">&nbsp;</div>
+        <div class="row">
+            <form name="question" class="form-question form-group" method="post" action="post_answer.php">
+                <?php foreach ($answers as $answer) { ?>
+                    <div class="form-group">
+                        <input class="btn btn-default btn-block" type="submit" name="answer[<?= $answer['answer_id'] ?>]" value="<?= $answer['answer'] ?>">
+                    </div>
+                <?php } ?>
+            </form>
+        </div>
+    </div>
 </body>
 </html>
 

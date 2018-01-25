@@ -1,4 +1,5 @@
 .myHeader{
+	background-color: white;
 	display: table;
 	margin-right: auto;
 	margin-left: auto;
@@ -8,9 +9,33 @@
 	font-weight: bold;
 	font-family: Book Antiqua;
 	
-}	
+}
+
+.container {
+	width: 100%;
+	max-width: 800px;
+	padding: 50px;
+	margin: 0 auto;
+}
+form.form-question {
+	width: 100%;
+}
+form.form-question .form-group {
+	margin: 5px 100px;
+}
+
+.back {
+	text-align: center;
+	background-color: white;
+	font-family: Book Antiqua;
+}
+
+.center {
+	justify-content: center;
+}
 
 .myForm {
+	font-family: Book Antiqua;
 	display: table;
 	margin-right: auto;
 	margin-left: auto;
