@@ -273,7 +273,7 @@ INSERT INTO `tests_questions` (`question_id`, `question`, `id_test`) VALUES
 (8, 'PHP server scripts are surrounded by which delimiters?', 1),
 (9, 'The process of building new classes from existing one is called?', 1),
 (10, 'The PHP syntax is most similar to:', 1),
-(11, 'Using <p> tag will ', 2),
+(11, 'Using "p" tag will ', 2),
 (12, 'Which of the following is not a pair tag? ', 2),
 (13, 'Comments in HTML documents is given by ', 2),
 (14, 'What is the correct HTML tag for inserting a line break? ', 2),
