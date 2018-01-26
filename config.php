@@ -1,5 +1,5 @@
 <?php
-define("HOST", "localhost");
+define("HOST", "localhost"); //Variables defination for connection to DB
 define("USER", "root");
 define("PASS", "");
 define("DB", "Vendon");

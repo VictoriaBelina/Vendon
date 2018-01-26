@@ -1,20 +1,20 @@
 <?php
 require_once 'init.php';
 
-$testId = (int)$session->get('test');
+$testId = (int)$session->get('test');   //Get test number from session
 $test = $testModel->getById($testId);
 
-$qnum = $session->get('qnum');
+$qnum = $session->get('qnum');          //Get question number from session
 if(!$qnum){
     $qnum = 0;
 }
 $session->set('qnum', $qnum);
 
-$question = $questionModel->getByTestIdAndOffset($testId, $qnum);
+$question = $questionModel->getByTestIdAndOffset($testId, $qnum);      //Redirect to question model to function, to get question
 if(!$question){
-    header('Location: post_result.php');
+    header('Location: post_result.php');                               // If questions ended redirect to results page
 }
-$answers = $answerModel->getByQuestionId($question['question_id']);
+$answers = $answerModel->getByQuestionId($question['question_id']);    //Get answers for question
 
 
 

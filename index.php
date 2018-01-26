@@ -1,14 +1,14 @@
 <?php
 	require_once "init.php";
-	$result = $testModel->getTests();
-    $session->clear();
+	$result = $testModel->getTests();    //Get tests from DB to var result
+    $session->clear();    //clear session
 ?>
 <!DOCTYPE html>
 <html>
 <head>
    <title> Test </title>
    <link rel="stylesheet" type="text/css" href="style.css">
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+   <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 </head>
 <body class="container" background="http://nonessentials.org/wp-content/uploads/2014/01/dots-small-pattern.png">
 	<header class="myHeader"> Check your knowledge here </header>
@@ -21,7 +21,7 @@
             <select style="width: 206px; margin-top:15px" name="test"> <!-- Test choosing-->
                 <option value=""> </option>
                 <?php foreach ($result as $v) { ?>
-                    <option value="<?= $v['id_test'] ?>"><?=$v['Name']?></option>
+                    <option value="<?= $v['id_test'] ?>"><?=$v['Name']?></option>      <!--Get test names from DB to dropdown -->
                 <?php } ?>
             </select>
         </div>
@@ -36,7 +36,7 @@
 				return false;
 			}
 
-			var x = document.forms["myForm"]["Tests"].value;      //Test is choosen or not
+			var x = document.forms["myForm"]["test"].value;      //Test is choosen or not
 			if (x == "") {
 				alert("Please, choose a test!");
 				return false;

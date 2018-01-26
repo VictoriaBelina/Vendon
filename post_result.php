@@ -1,7 +1,7 @@
 <?php
 require_once 'init.php';
 $user = $userModel->getById($session->get('uid'));
-$endResult = $endModel->getById($session->get('result'));
+$endResult = $endModel->getById($session->get('result'));    //Get variables from session: user name, result and test number to fill paragraphs
 $test = $testModel->getById($endResult['id_test']);
 ?>
 
