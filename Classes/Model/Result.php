@@ -12,6 +12,6 @@ class Result extends Model
         $db->bindValue(':endId', (int)$endId, PDO::PARAM_INT);
         $db->execute();
 
-        return $this->db->lastInsertId();
+        return $this->db->lastInsertId();         //Records insert into DB table results
     }
 }

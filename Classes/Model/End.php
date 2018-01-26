@@ -4,7 +4,7 @@ class End extends Model
 {
     private $questionModel;
 
-    public function __construct(PDO $db, Question $questionModel)
+    public function __construct(PDO $db, Question $questionModel)   
     {
         parent::__construct($db);
         $this->questionModel = $questionModel;
@@ -12,7 +12,7 @@ class End extends Model
 
     public function getById($id)
     {
-        $db = $this->db->prepare("SELECT * FROM `end_tests` WHERE `id`= :id");
+        $db = $this->db->prepare("SELECT * FROM `end_tests` WHERE `id`= :id");   //Get ended test id
         $db->bindValue(':id', $id, PDO::PARAM_INT);
         $db->execute();
 
@@ -21,11 +21,11 @@ class End extends Model
 
     public function incrementCorrect($id)
     {
-        $db = $this->db->prepare("UPDATE `end_tests` SET `correct_questions` = `correct_questions` + 1 WHERE `id` = :id");
+        $db = $this->db->prepare("UPDATE `end_tests` SET `correct_questions` = `correct_questions` + 1 WHERE `id` = :id");   //Update correct questions number if user answer correctly
         $db->bindValue(':id', $id, PDO::PARAM_INT);
         $db->execute();
 
-        return $this->db->lastInsertId();
+        return $this->db->lastInsertId();    //Update by last records ID
     }
 
     public function save($testId, $userId)
@@ -39,6 +39,6 @@ class End extends Model
         $db->bindValue(':uid', $userId, PDO::PARAM_INT);
         $db->execute();
 
-        return $this->db->lastInsertId();
+        return $this->db->lastInsertId();   //Save results in DB table end tests
     }
 }
